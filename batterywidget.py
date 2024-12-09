@@ -1,46 +1,47 @@
+# Responsive Battery Widget
+# Author: Alexander Thiesen
+# GitHub: https://github.com/alexander-thiesen
+
 # Fork of
 # Battery Widget
 # Author: Theara Kong
 # Email: theara729@gmail.com
 # GitHub: https://github.com/Ktheara
 
-# Responsive Battery Widget
-# Author: Alexander Thiesen
-# GitHub: https://github.com/alexander-thiesen
 
-from PySide6 import QtWidgets
+from PySide6.QtWidgets import QLabel, QWidget
 from PySide6.QtCore import Slot
 
-class BatteryWidget(QtWidgets.QWidget):
+class BatteryWidget(QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
         # Create the main container widget
-        self.wg_container = QtWidgets.QWidget(self)
+        self.wg_container = QWidget(self)
         self.wg_container.setStyleSheet("""
             #wg_container {
-                background: rgba(0, 0, 0, 0);  # Transparent background
+                background: rgba(0, 0, 0, 0);
             }
         """)
         self.wg_container.setObjectName("wg_container")
 
         # Create the battery head (small rectangle at the top)
-        self.body_head = QtWidgets.QLabel(self.wg_container)
+        self.body_head = QLabel(self.wg_container)
         self.body_head.setStyleSheet("""
             #body_head {
-                background: #ffffff;  # White background for the head
-                border-radius: 2px;  # Rounded corners
+                background: #ffffff;
+                border-radius: 2px;
             }
         """)
         self.body_head.setText("")  # No text inside the head
         self.body_head.setObjectName("body_head")
 
         # Create the battery body (main rectangle area)
-        self.body = QtWidgets.QLabel(self.wg_container)
+        self.body = QLabel(self.wg_container)
         self.body.setStyleSheet("""
             #body {
-                border: 3px ridge #ffffff;  # White ridged border
-                border-radius: 5px;  # Rounded corners
+                border: 3px ridge #ffffff;
+                border-radius: 5px;
             }
         """)
         self.body.setText("")  # No text inside the body
@@ -49,10 +50,10 @@ class BatteryWidget(QtWidgets.QWidget):
         # Create the battery level bars (5 sections for different levels)
         self.level_labels = []
         for i in range(5):
-            label = QtWidgets.QLabel(self.wg_container)
+            label = QLabel(self.wg_container)
             label.setStyleSheet(f"""
                 #lvl_{i+1} {{
-                    background: #7CFC00;  # Default green color for active levels
+                    background: #7CFC00;
                 }}
             """)
             label.setText("")  # No text for the level bars
@@ -118,10 +119,10 @@ class BatteryWidget(QtWidgets.QWidget):
             self.setBatteryStyle("#FFFFFF", "#F28500", [1, 1, 0, 0, 0])
         elif self.value <= 60:
             # Medium charge: Yellow color with 3 bars active
-            self.setBatteryStyle("#FFFFFF", "#ffd700", [1, 1, 1, 0, 0])
+            self.setBatteryStyle("#FFFFFF", "#FFD700", [1, 1, 1, 0, 0])
         elif self.value <= 80:
             # High charge: Light green color with 4 bars active
-            self.setBatteryStyle("#FFFFFF", "#32cd32", [1, 1, 1, 1, 0])
+            self.setBatteryStyle("#FFFFFF", "#32CD32", [1, 1, 1, 1, 0])
         else:
             # Full charge: Bright green color with all bars active
             self.setBatteryStyle("#FFFFFF", "#7CFC00", [1, 1, 1, 1, 1])
