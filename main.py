@@ -1,21 +1,36 @@
-from PySide6 import QtWidgets
-from batterywidget import BatteryWidget  # Import your custom BatteryWidget class
+import sys
+from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
+from batterywidget import BatteryWidget  # Import your BatteryWidget class
+
+class HauptFenster(QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("Battery Widget Demo")
+
+        # Create the central widget for the main window
+        self.central_widget = QWidget(self)
+        self.setCentralWidget(self.central_widget)
+
+        # Set a layout for the main window
+        layout = QVBoxLayout(self.central_widget)
+
+        # Create the BatteryWidget and add it to the layout
+        self.battery_widget = BatteryWidget(self.central_widget)
+        #self.battery_widget.setValue(50)  # Set initial battery value
+
+        layout.addWidget(self.battery_widget)
+
+        # Optionally, start a timer for animation (if needed)
+        self.timer_id = self.startTimer(100)
+
+    # Uncomment the following method if you want to use the timer for periodic updates
+    def timerEvent(self, event):
+        """Increases the battery progress cyclically."""
+        value = (self.battery_widget.value + 1) % 101
+        self.battery_widget.setValue(value)
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-
-    # Create the main window
-    main_window = QtWidgets.QMainWindow()
-    main_window.setWindowTitle("Battery Widget Demo")
-
-    # Create an instance of BatteryWidget and set a sample battery value
-    battery_widget = BatteryWidget(main_window)
-    battery_widget.setValue(100)  # Example value for the battery level
-
-    # Set the BatteryWidget as the central widget of the main window
-    main_window.setCentralWidget(battery_widget)
-    main_window.show()  # Display the main window
-
-    # Start the application event loop
+    app = QApplication(sys.argv)
+    fenster = HauptFenster()
+    fenster.show()
     sys.exit(app.exec())
