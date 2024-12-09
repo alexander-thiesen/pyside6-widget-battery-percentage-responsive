@@ -1,6 +1,6 @@
-# PyQt5 Battery Percentage Widget Fix Size
+# PySide6 Battery Percentage Widget (Responsive Version)
 
-I create this widget while making a GUI at work. I was trying to find any open-source battery widget but could not find one. Sharing this fix size widget won't help much but hope for someone was looking for a quick one like me.
+I updated the widget of https://github.com/Ktheara/pyqt5-widget-battery-percentage to be responsive to size changes. Additionally, I switched from PyQt5 to PySide6, as it offers better support and more modern features. 
 
 ![Imgae](https://github.com/Ktheara/pyqt5-widget-battery-percentage/blob/main/image/pyqt5-battery-widget.png)
 
@@ -14,5 +14,7 @@ I create this widget while making a GUI at work. I was trying to find any open-s
     ```
 
 # Note
-- This widget is fix size, you can resize in `batterywidget.py`
-- Feel free to update and republish it, maybe make it **responsive**.
+- This widget is responsive, meaning it will adjust to different screen sizes.
+It now uses PySide6 instead of PyQt5.
+The widget is resizable and the behavior can be further customized in `batterywidget.py`.
+- This is a fork of https://github.com/Ktheara/pyqt5-widget-battery-percentage
